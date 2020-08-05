@@ -1,0 +1,37 @@
+.paginacion {
+  margin: 10px 0;
+}
+
+.paginacion ul {
+  list-style: none;
+  text-align: left;
+}
+
+.paginacion ul li {
+  display: inline-block;
+
+}
+
+.paginacion ul li button {
+  display: block;
+  padding: 0 7px;
+  color: #0d4000;
+  background: #9fff9d;
+  margin-left:2px;
+}
+
+.paginacion ul li button:hover{
+  cursor: pointer;
+  color: #fff;
+  background: #1a8c00;
+  font-weight: bold;
+}
+
+.paginacion ul li .activo {
+  color: #fff;
+  background: #1a8c00;
+  font-weight: bold;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+

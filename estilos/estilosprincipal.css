@@ -1,0 +1,106 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box; 
+}
+
+body {
+  background: #d7ffce;
+}
+
+.contenedor {
+  max-width: 1000px;
+  margin: auto;
+}
+
+img {
+    /* se les pone a todas las imagenes display blok, y así se manejan mejor. */
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+/*------------------- Estilos del nav -------------------*/
+
+.navbar {
+  margin-top: 35px;
+  width: 100%;
+  background: #1a8c00;
+}
+
+.contenedor-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.iconos-nav {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.iconos-nav a {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.user-nav {
+  padding: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.user-nav a {
+  color: white;
+}
+
+.iconos-nav a:hover{
+  background: rgba(255,255,255,0.3);
+}
+
+.banner {
+  margin-top: -75px;
+  position: relative;
+/* se le da z-indez -1000 para que se quede por encima la barra de navegacion */
+  z-index: -1000;
+}
+
+.img-banner {
+  object-fit: cover;
+  height: 500px;
+}
+
+/* se añade el elemento before del banner, para que así se le de un fondo oscurito, hay que añadirle contenido "" vacio, y darle posición absoluta de su elemento img-banner También se le da un z-index 1000 para que esté encima del banner*/
+
+.banner:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(11,57,0,0.5);
+  z-index: 1000;
+}
+/* Este es el texto que estará en el banner, se hace el truco de siempre, se pone top y left 50%, y después se le da un transform translate X e Y de -50% */
+.banner-contenido{
+  width: 90%;
+  color: white;
+  text-align: center;
+  position: absolute;
+  z-index: 1500;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+/*  font-size: 2.5em;
+  font-weight: bold; */
+}
+
+.banner-contenido h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.banner-contenido p {
+  font-size: 1.8em;
+}

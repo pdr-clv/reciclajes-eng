@@ -1,0 +1,6 @@
+Modificaciones en base de datos Mysql
+
+Hay que añadir columna notas VARCHAR(150) a la tabla ventas con un altertable. Creo que es ALTER TABLE ventas ADD notas VARCHAR(150)
+
+Hay que añadir columna notas en compras. ALTER TABLE compras ADD notas VARCHAR(150)
+
