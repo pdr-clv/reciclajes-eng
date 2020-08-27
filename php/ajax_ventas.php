@@ -9,22 +9,27 @@
 
   if ($_POST['action'] == 'eliminar_venta'){
 
-  $id = $_POST['id'];
-  // se hace un select-numventa, para calcular que venta se va a eliminar, y después mostrarla en un alert, para que el usuario vea el número de venta que se ha eliminado.
-  $sql_numventa = "SELECT numventa,fecha FROM ventas WHERE idventa = $id";
+    if ($varsesion == 'user_test') {
+      echo 'User '.$varsesion.' is not allowed to perform this action';
+    } else {
+      $id = $_POST['id'];
+    // se hace un select-numventa, para calcular que venta se va a eliminar, y después mostrarla en un alert, para que el usuario vea el número de venta que se ha eliminado.
+    $sql_numventa = "SELECT numventa,fecha FROM ventas WHERE idventa = $id";
   
-  $resultado_numventa = $mysqli -> query($sql_numventa);
-  $row = $resultado_numventa->fetch_assoc();
+    $resultado_numventa = $mysqli -> query($sql_numventa);
+    $row = $resultado_numventa->fetch_assoc();
   
-  // este select es para ejecutar la consulta y eliminar la venta con el id que se ha pasado en el ajax.
-  $sql = "DELETE FROM ventas WHERE idventa = $id";
+    // este select es para ejecutar la consulta y eliminar la venta con el id que se ha pasado en el ajax.
+    $sql = "DELETE FROM ventas WHERE idventa = $id";
 
 
-  $resultado = $mysqli -> query($sql);
+    $resultado = $mysqli -> query($sql);
   
 //se devuelve el valor de la venta eliminada.
   echo $row['numventa']. "/". date("y",strtotime($row['fecha']));  
     
+    }
+  
   }
   
   if ($_POST['action'] == 'mostrar_venta'){
@@ -35,7 +40,7 @@
   $resultado_numventa = $mysqli -> query($sql_numventa);
   $row = $resultado_numventa->fetch_assoc();
   
-  echo '¿Deseas eliminar la venta <b>'.$row['numventa']. "/". date("y",strtotime($row['fecha'])). " </b>del cliente<b> ".$row['razon_social']. "</b>?";
+  echo '¿Are you sure do you want to delete <b>'.$row['numventa']. "/". date("y",strtotime($row['fecha'])). " </b>client<b> ".$row['razon_social']. "</b>?";
   
   }
   if ($_POST['action'] == 'num_venta') {

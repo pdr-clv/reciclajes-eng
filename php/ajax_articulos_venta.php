@@ -6,7 +6,7 @@
   
   if ($_GET['action'] == 'cargar_venta') {
     $idventa = $_GET['idventa'];
-    $sql = "SELECT ventas.idventa as id, ventas.idcliente as idcliente, ventas.numventa as numventa, ventas.fecha as fecha, clientes.razon_social as razon_social, ventas.iva as iva, ventas.notas as notas FROM ventas INNER JOIN clientes ON ventas.idcliente = clientes.idcliente WHERE idventa = $idventa";
+    $sql = "SELECT ventas.idventa as id, ventas.idcliente as idcliente, ventas.numventa as numventa, ventas.fecha as fecha, clientes.razon_social as razon_social, ventas.iva as iva, ventas.notas as notas FROM ventas INNER JOIN clientes ON ventas.idcliente = clientes.idcliente WHERE idventa = ".$idventa;
     $resultado = $mysqli -> query($sql);
     
     if ($resultado){

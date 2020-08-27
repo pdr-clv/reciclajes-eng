@@ -16,7 +16,7 @@ $(document).ready(function(){
       $('#body-eliminar').html(datosajax);
     })
     .fail(function(){
-      eModal.alert("<p class='text-danger'>Error al intentar cargar información de venta a eliminar</p>"," ");
+      eModal.alert("<p class='text-danger'>Error loading sale to delete</p>"," ");
     });  
   });
     
@@ -36,7 +36,7 @@ $(document).ready(function(){
       location.reload();
     })
     .fail(function(){
-      eModal.alert("<p class='text-danger'>Error al intentar eliminar Venta</p>"," ");
+      eModal.alert("<p class='text-danger'>Error deleting sale</p>"," ");
     });
   });
   // se detecta cuando se abre el modal, y se oculta la barra de navegación que nos da problemas de z-index. Cuando se detecta que se cierra el modal, se vuelve a mostrar.
@@ -61,18 +61,18 @@ $(document).ready(function(){
   $('#btnGuardar').on('click',function(){
     if($('#fecha').val() == "" || $('#fecha').val() == "Num." ) {
     //  alert("El campo fecha no puede estar vacio");
-      eModal.alert("<p class='text-danger'>Selecciona una fecha correcta</p>"," ");
-      $('#errorfecha').html("Selecciona una fecha");
+      eModal.alert("<p class='text-danger'>Type correct date</p>"," ");
+      $('#errorfecha').html("Select date");
       $('#fecha').addClass("is-invalid");
     } else if ($('#idcliente').text() == "00") {
-      eModal.alert("<p class='text-danger'>Selecciona un cliente de la lista desplegable</p>"," ");
-      $('#errorcliente').html("Selecciona un cliente de la lista");
+      eModal.alert("<p class='text-danger'>Select a client from the list</p>"," ");
+      $('#errorcliente').html("Select a client from the list");
       $('#cliente').addClass("is-invalid");
     } else if ($('#iva').val() == ""){
-      eModal.alert("<p class='text-danger'>El campo iva no puede estar vacio</p>"," ");
+      eModal.alert("<p class='text-danger'>TAX Field cannot be empty</p>"," ");
 // el campo notas no puede tener mas de un número concreto de caracteres, para que no sea muy largo.
     } else if ($('#notas').val().length > 150){
-      eModal.alert("<p class='text-danger'>No se pueden escribir mas de 150 caracteres en la casilla notas</p>"," ");
+      eModal.alert("<p class='text-danger'>It is not possible to text more than 150 characters</p>"," ");
     } else {
       var action = 'guardar_venta';
       var fecha = $('#fecha').val();
@@ -99,11 +99,11 @@ $(document).ready(function(){
           alert("Venta guardada correctamente");
           window.location = 'articulos_venta.php';
         } else {
-          eModal.alert("<p class='text-danger'>No se ha podido guardar la venta, algún campo escrito no es correcto</p>"," ");
+          eModal.alert("<p class='text-danger'>It was not possible to save sale, some fields are not valid</p>"," ");
         }
       })
       .fail(function(){
-        eModal.alert("<p class='text-danger'>Error al intentar añadir la venta</p>"," ");
+        eModal.alert("<p class='text-danger'>Error saving sale</p>"," ");
       });
     }
   });
@@ -146,7 +146,7 @@ $(document).ready(function(){
       $('#cliente').select();
     })
     .fail(function(){
-    eModal.alert("<p class='text-danger'>Error al conseguir numero de fecha</p>"," ");
+    eModal.alert("<p class='text-danger'>Error loading date</p>"," ");
     });
   }); 
   $('#cliente').autocomplete({

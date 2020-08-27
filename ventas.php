@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <title>Ventas</title>
+    <title>Sales</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1.5, minimum-scale=1.0">
     <link rel="stylesheet" href="estilos/bootstrap.min.css">
@@ -97,20 +97,19 @@
         <nav class="navbar navbar-expand-lg navbar-dark container fondonav">
     <a class="navbar-brand" href="#">
       <img src="img/ventas_icono.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    Panel de Ventas
+    Sales Darshboard
     </a>
-    <a href="principal.php" class="btn btn-info mr-lg-2 my-1 my-lg-0 px-3" title="Volver a principal"><i class="fas fa-home"></i></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto">
-      <button class="btn btn-warning text-dark mr-lg-2 my-1 my-lg-0" type="button" name="agregar" id="agregar" data-toggle="modal" data-target="#nuevaVenta"><i class="far fa-plus-square"></i> Nueva Venta</button>
+      <button class="btn btn-warning text-dark mr-lg-2 my-1 my-lg-0" type="button" name="agregar" id="agregar" data-toggle="modal" data-target="#nuevaVenta"><i class="far fa-plus-square"></i> New Sale</button>
     </div>
     <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-    <input id="busqueda" name="busqueda" class="form-control mr-lg-2" type="search" placeholder="Cliente" aria-label="Search" value="<?php echo $valor_filtro; ?>">
-    <button class="btn btn-info my-2 my-lg-0 mr-lg-2" type="submit"><i class="fas fa-search"></i> Buscar</button>
-    <a href="javascript:history.back(-1);" class="btn btn-secondary mr-lg-2 my-1 my-lg-0" title="Volver"><i class="fas fa-undo-alt"></i></a>
+    <input id="busqueda" name="busqueda" class="form-control mr-lg-2" type="search" placeholder="Filter Client" aria-label="Search" value="<?php echo $valor_filtro; ?>">
+    <button class="btn btn-info my-2 my-lg-0 mr-lg-2" type="submit"><i class="fas fa-search"></i> Search</button>
+    <a href="principal.php" class="btn btn-secondary mr-lg-2 my-1 my-lg-0" title="Home"><i class="fas fa-home"></i></a>
   </form>
   </div>
 </nav>
@@ -125,11 +124,11 @@
             <tr>
 <!-- no hace falta mostrar el campo IdVenta, se llamará después como row['id'] para eliminar, modificar, etc. -->
             <!--  <th>IdVenta</th> -->
-              <th>Numero</th>
-              <th>Fecha</th>
-              <th>Cliente</th>
-              <th>Importe</th>
-              <th>Iva</th>
+              <th>Number</th>
+              <th>Date</th>
+              <th>Client</th>
+              <th>Amount</th>
+              <th>Tax</th>
               <th></th>
               <th></th>
             </tr>
@@ -155,7 +154,7 @@
                   }
                 ?></td>
               <td><?php echo $row['iva'];?></td>
-              <td><a href="articulos_venta.php?idventa=<?php echo $row['id'];?>"><i class="far fa-eye"></i> Ver</a></td>
+              <td><a href="articulos_venta.php?idventa=<?php echo $row['id'];?>"><i class="far fa-eye"></i> View</a></td>
               <td><a id="<?php echo $row['id'];?>" class="deleteData text-danger" href="#"  title="Eliminar"><i class="fas fa-trash-alt"></i></a></td>
             </tr>
             <?php }
@@ -212,9 +211,9 @@
       <!-- Footer Links -->
 
       <!-- Copyright -->
-      <div class="footer-copyright text-center py-3">© 2018 Copyright: Reciclajes Catalán S.L.</div>
+      <div class="footer-copyright text-center py-3">© 2018 Copyright: Recycling Ltd.</div>
       <div class="footer-copyright text-center py-3">
-        <a class="user-nav "href="php/cerrarsesion.php">Cerrar sesion: <?php  echo $varsesion ?></a>
+        <a class="user-nav "href="php/cerrarsesion.php">Close sesion: <?php  echo $varsesion ?></a>
       </div>
     <!-- Copyright -->
 
@@ -233,7 +232,7 @@
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Nueva Venta</h4>
+            <h4 class="modal-title" id="myModalLabel">New Sale</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
 
@@ -242,10 +241,10 @@
             <form class= "w-100 shadow-lg form-horizontal" id="insert_form">
             <div class="form-group row">
 <!-- con pr-0 quitamos el pading a la derecha, y ponemos text-center, para que el label fecha salga separado de la izquierda, y no se quede pegado -->
-              <label for="fecha" class="pr-0 text-center col-sm-2 col-form-label">Fecha</label>
+              <label for="fecha" class="pr-0 text-center col-sm-2 col-form-label">Date</label>
               <div class="col-sm-10">
                 <div class="input-group">
-                  <input type="date" class="form-control" id="fecha" placeholder="Escribe fecha">
+                  <input type="date" class="form-control" id="fecha" placeholder="Date">
                   <div class="input-group-append">
                     <span class="input-group-text" id="numVenta">Num.</span>
                   </div>
@@ -257,13 +256,13 @@
             <span id="errorfecha" class="text-danger small font-weight-bold"></span>
             </div>
             <div class="form-group row">
-              <label for="cliente" class="pr-0 text-center col-sm-2 col-form-label">Cliente</label>
+              <label for="cliente" class="pr-0 text-center col-sm-2 col-form-label">Client</label>
               <div class="col-sm-10">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="idcliente">00</span>
                   </div>
-                  <input type="text" class="form-control" id="cliente" placeholder="Escribe cliente">
+                  <input type="text" class="form-control" id="cliente" placeholder="Type client">
                 </div>
               </div>
             </div>
@@ -272,7 +271,7 @@
               <span id="errorcliente" class="text-danger small font-weight-bold"></span>
             </div>
             <div class="form-group row">
-              <label for="iva" class="pr-0 text-center col-sm-2 col-form-label">Iva</label>
+              <label for="iva" class="pr-0 text-center col-sm-2 col-form-label">Tax</label>
               <div class="col-sm-10">
                 <select class="form-control" id="iva" name="iva" required>
                     <option value="23">23</option>
@@ -295,7 +294,7 @@
               </div>
             </div>
               <div class="form-group row">
-              <label for="notas" class="pr-0 text-center col-sm-2 col-form-label">Notas</label>
+              <label for="notas" class="pr-0 text-center col-sm-2 col-form-label">Notes</label>
               <div class="col-sm-10">
                 <div class="input-group">
                 <textarea name="notas" class ="w-100" id="notas" rows="3" placeholder="Escribe aquí alguna nota o comentario"></textarea>
@@ -305,8 +304,8 @@
               </form>
           <!-- Modal footer -->
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="btnGuardar">Save</button>
               <!--<input type="submit" name="submit" class="btn btn-primary" value="Guardar">-->
             </div>
         </div>
@@ -318,7 +317,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4>Eliminar venta</h4>
+          <h4>Delete Sale</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" id=>
@@ -328,8 +327,8 @@
         <input type="text" id="idVenta" class="d-none">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-danger btn-xs text-light" id="deleteButton">Eliminar</a>  
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-danger btn-xs text-light" id="deleteButton">Delete</a>  
         </div>
       </div>
     </div>
