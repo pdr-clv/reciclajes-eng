@@ -10,7 +10,7 @@
   if ($_POST['action'] == 'eliminar_venta'){
 
     if ($varsesion == 'user_test') {
-      echo 'User '.$varsesion.' is not allowed to perform this action';
+      echo 2;
     } else {
       $id = $_POST['id'];
     // se hace un select-numventa, para calcular que venta se va a eliminar, y después mostrarla en un alert, para que el usuario vea el número de venta que se ha eliminado.
@@ -26,7 +26,11 @@
     $resultado = $mysqli -> query($sql);
   
 //se devuelve el valor de la venta eliminada.
-  echo $row['numventa']. "/". date("y",strtotime($row['fecha']));  
+    if ($resultado) {
+      echo 1;
+    } else {
+      echo 0;
+    }
     
     }
   
@@ -62,23 +66,27 @@
   }
   
   if ($_POST['action'] == 'guardar_venta'){
-    
-    $fecha = $_POST['fecha'];
-    $idcliente = $_POST['idcliente'];
-    $iva = $_POST['iva'];
-    $numVenta = $_POST['numVenta'];
-    $notas = $_POST['notas'];
-
-    $sql = "INSERT INTO ventas(numventa, fecha, idcliente, iva, notas) VALUES($numVenta,'$fecha',$idcliente,$iva,'$notas')";
-
-
-    $resultado = $mysqli -> query($sql);
-
-    if ($resultado) {
-      echo '1';
+    if ($varsesion == 'user_test') {
+      echo '2';
     } else {
-      echo '0';
+      $fecha = $_POST['fecha'];
+      $idcliente = $_POST['idcliente'];
+      $iva = $_POST['iva'];
+      $numVenta = $_POST['numVenta'];
+      $notas = $_POST['notas'];
+  
+      $sql = "INSERT INTO ventas(numventa, fecha, idcliente, iva, notas) VALUES($numVenta,'$fecha',$idcliente,$iva,'$notas')";
+  
+  
+      $resultado = $mysqli -> query($sql);
+  
+      if ($resultado) {
+        echo '1';
+      } else {
+        echo '0';
+      }
     }
+
   
   }
   if ($_GET['action'] == 'rellena_combo'){

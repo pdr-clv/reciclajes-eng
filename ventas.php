@@ -297,7 +297,7 @@
               <label for="notas" class="pr-0 text-center col-sm-2 col-form-label">Notes</label>
               <div class="col-sm-10">
                 <div class="input-group">
-                <textarea name="notas" class ="w-100" id="notas" rows="3" placeholder="Escribe aquí alguna nota o comentario"></textarea>
+                <textarea name="notas" class ="w-100" id="notas" rows="3" placeholder="Text here any comment"></textarea>
                 </div>
               </div>
             </div>

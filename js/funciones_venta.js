@@ -31,9 +31,14 @@ $(document).ready(function(){
       data:{'action':action,'id': id}
     })
     .done(function(datosajax){
-      $('#deleteModal').modal("hide");
-      alert('Se ha eliminado la venta '.concat(datosajax));
-      location.reload();
+      if (datosajax == 2) {
+        eModal.alert('user_test is not allowed to perform this action','')
+      } else if (datosajax == 1) {
+        alert ('Sale deleted');
+        location.reload();
+      } else {
+        eModal.alert('It was not possible to delete sale','');
+      }
     })
     .fail(function(){
       eModal.alert("<p class='text-danger'>Error deleting sale</p>"," ");
@@ -95,11 +100,13 @@ $(document).ready(function(){
 //cuando se ejecuta la funciona done, que es si todo sale bien, primero se pone a cero todos los valores de del formulario modal. Se hace reset.
         $('#insert_form')[0].reset();
         $('#nuevaVenta').modal('hide');
-        if (datosajax==1){
-          alert("Venta guardada correctamente");
+        if (datosajax == 1){
+          alert("Sale saved successfully");
           window.location = 'articulos_venta.php';
-        } else {
+        } else if (datosajax == 0 ){
           eModal.alert("<p class='text-danger'>It was not possible to save sale, some fields are not valid</p>"," ");
+        } else {
+          eModal.alert('<p>user_test is not allowed to perform this action</p>','');
         }
       })
       .fail(function(){

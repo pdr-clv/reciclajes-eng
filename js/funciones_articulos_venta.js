@@ -26,7 +26,7 @@ $(document).ready(function(){
         $('#tablaBody').html(datosajax);  
       }
     }).fail(function(){
-      eModal.alert("<p class='text-danger'>Error al cargar lineas venta</p>"," ");
+      eModal.alert("<p class='text-danger'>Error loading sales items</p>"," ");
     }).done(function(){
       $('.btn_eliminar_linea').on('click',function(){
       var idlinea_eliminar = $(this).attr('id');
@@ -45,8 +45,10 @@ $(document).ready(function(){
               $('#modal_eliminar_linea').modal('toggle');
               $(fila_eliminar).hide(1800);
               //eModal.alert('El articulo ha sido eliminado correctamente de la venta');
+            } else if (data == 0) {
+              eModal.alert('Error. It was not possible to delete item');
             } else {
-              eModal.alert('No se ha podido eliminar el articulo de la venta');
+              eModal.alert('user_test is not allowed to perform this action');
             }
           }
         }).done(actualiza_importe());
@@ -150,7 +152,7 @@ $(document).ready(function(){
       $(this).val(txtnumerico);
       $('#txtImporteLin').val(txtImporte);
     } else {
-      $('#errorCantidad').html("Escribe número");
+      $('#errorCantidad').html("Type number");
       $(this).addClass("is-invalid");
       $('#txtImporteLin').val("");
     }
@@ -209,16 +211,16 @@ $(document).ready(function(){
   });
   $('#btnGuardar').on('click',function(){
     if($('#txtIdArticulo').val() === "") {
-      eModal.alert("<p class='text-danger'>Revisa los datos introducidos si son correctos</p>"," ");
+      eModal.alert("<p class='text-danger'>Check if all data are valid</p>"," ");
       $('#txtArticulo').addClass("is-invalid");
       $('#txtDescripcion').addClass("is-invalid");
-      $('#errorArticulo').html("Selecciona un articulo");
+      $('#errorArticulo').html("Select article");
     } else if ($('#txtCantidad').val() === 0){
-      eModal.alert("<p class='text-danger'>La cantidad no puede ser cero</p>"," ");
+      eModal.alert("<p class='text-danger'>Amount cannot be null value</p>"," ");
       $('#txtCantidad').addClass("is-invalid");
       $('#errorCantidad').html("Cantidad > 0");
     } else if ($('#txtImporteLin').val() === ""){
-      eModal.alert("<p class='text-danger'>Escribe valores numéricos en los campos cantidad y precio.</p>"," ");
+      eModal.alert("<p class='text-danger'>Only valid numeric values in quantity and price.</p>"," ");
     } 
     else {
     var action = 'guardar_linea';
@@ -234,14 +236,16 @@ $(document).ready(function(){
     })
     .done(function(datosajax){
       if (datosajax == 1){
-        alert("articulo guardado correctamente");
+        alert("Article saved");
         location.reload();
+      } else if (datosajax == 0) {
+        alert("Error, something went wrong.");
       } else {
-        alert("no se ha podido guardar el articulo");
+        alert('usert_test is not allow to perform this action');
       }
     })
     .fail(function(){
-    eModal.alert("<p class='text-danger'>Error al guardar</p>"," ");
+    eModal.alert("<p class='text-danger'>Error saving article</p>"," ");
     });
     }
   });
@@ -249,11 +253,11 @@ $(document).ready(function(){
   
   $("#nuevoArticulo").on('show.bs.modal',function(){
     if ($('#txtIdLinea').val() == "") {
-      $('#nuevoArticulolabel').html("Nuevo Articulo");
+      $('#nuevoArticulolabel').html("New article");
       $('#btnGuardar').show();
       $('#btnEditar').hide();
     } else {
-      $('#nuevoArticulolabel').html("Editar Articulo");
+      $('#nuevoArticulolabel').html("Edit article");
       $('#btnGuardar').hide();
       $('#btnEditar').show();
     }
@@ -269,16 +273,16 @@ $(document).ready(function(){
   });
     $('#btnEditar').on('click',function(){
     if($('#txtIdArticulo').val() === "") {
-      eModal.alert("<p class='text-danger'>Revisa los datos introducidos si son correctos</p>"," ");
+      eModal.alert("<p class='text-danger'>Review if all data are correct.</p>"," ");
       $('#txtArticulo').addClass("is-invalid");
       $('#txtDescripcion').addClass("is-invalid");
       $('#errorArticulo').html("Selecciona un articulo");
     } else if ($('#txtCantidad').val() === 0){
-      eModal.alert("<p class='text-danger'>La cantidad no puede ser cero</p>"," ");
+      eModal.alert("<p class='text-danger'>Quantity cannot be zero or null</p>"," ");
       $('#txtCantidad').addClass("is-invalid");
       $('#errorCantidad').html("Cantidad > 0");
     } else if ($('#txtImporteLin').val() === ""){
-      eModal.alert("<p class='text-danger'>Escribe valores numéricos en los campos cantidad y precio.</p>"," ");
+      eModal.alert("<p class='text-danger'>Type only numeric values in fields quantity and price.</p>"," ");
     } 
     else {
     var action = 'editar_linea';
@@ -298,12 +302,14 @@ $(document).ready(function(){
         $('#nuevoArticulo').modal('toggle');
         $(fila_editar).hide(2000);
         
+      } else if (datosajax == 0) {
+        alert("It was not possible to edit article");
       } else {
-        alert("no se ha podido editar el articulo");
+        alert ('user_test is not allowed to perform this action');
       }
     })
     .fail(function(){
-    eModal.alert("<p class='text-danger'>Error al guardar</p>"," ");
+    eModal.alert("<p class='text-danger'>Error saving</p>"," ");
     });
     }
   });
@@ -416,21 +422,21 @@ $(document).ready(function(){
       var numVenta= $('#txt_edit_numVenta').val();
     if($('#txt_edit_fecha').val() === "" || $('#txt_edit_fecha').val() == "Num." ) {
     //  alert("El campo fecha no puede estar vacio");
-      eModal.alert("<p class='text-danger'>Selecciona una fecha correcta</p>"," ");
-      $('#error_edit_fecha').html("Selecciona una fecha");
+      eModal.alert("<p class='text-danger'>Select correct date</p>"," ");
+      $('#error_edit_fecha').html("Select a date");
       $('#txt_edit_fecha').addClass("is-invalid");
     } else if ($('#spn_idcliente').text() == "00") {
-      eModal.alert("<p class='text-danger'>Selecciona un cliente de la lista desplegable</p>"," ");
-      $('#spn_errorcliente').html("Selecciona un cliente de la lista");
+      eModal.alert("<p class='text-danger'>Select a client from the list</p>"," ");
+      $('#spn_errorcliente').html("Select a client from the list");
       $('#txt_edit_cliente').addClass("is-invalid");
     } else if ($('#txt_edit_iva').val() === ""){
-      eModal.alert("<p class='text-danger'>El campo iva no puede estar vacio</p>"," ");
+      eModal.alert("<p class='text-danger'>Tax field cannot be null</p>"," ");
 // el campo notas no puede tener mas de un número concreto de caracteres, para que no sea muy largo.
     } else if ($('#txtarea_edit_notas').val().length > 150){
-      eModal.alert("<p class='text-danger'>No se pueden escribir mas de 150 caracteres en la casilla notas</p>"," ");
+      eModal.alert("<p class='text-danger'>You cannot text more than 150 characters.</p>"," ");
 // este if, si el txt_input duplicado (que está oculto), tiene un valor mayor que cero, se supone que hemos seleccionado un numVenta duplicado, y no dejará continuar para editar la venta. Así nos aseguramos que no se duplican valores
     } else if ($('#txt_duplicado').val()>0){
-      eModal.alert("<p class='text-danger'>No puede existir valores duplicados en el campo Numero de venta, revisa que valor le asignas</p>"," ");
+      eModal.alert("<p class='text-danger'>It is not possible duplicate values from other sales</p>"," ");
       $('#txt_edit_numVenta').addClass("is-invalid");
     } else {
       var action = 'editar_venta';
@@ -447,14 +453,16 @@ $(document).ready(function(){
       .done(function(datosajax){
         if (datosajax == 1){
           $("#modal_edita_venta").modal('toggle');
-          alert("Se han modificado los datos del encabezado correctamente")
+          alert("Header modified corrrectly")
           location.reload();
+        } else if (datosajax == 0) {
+          alert("It was not possible to edit sale header");
         } else {
-          alert("no se ha podido modificar los datos del encabezado");
+          alert ('user_test is not allowed to perform this action');
         }
       })
       .fail(function(){
-      eModal.alert("<p class='text-danger'>Error al guardar</p>"," ");
+      eModal.alert("<p class='text-danger'>Error saving</p>"," ");
       });
     }
   });
@@ -497,7 +505,7 @@ function actualiza_importe() {
       $('#spanIva').text(iva);
     }
     }).fail(function(){
-      alert('Ha habido un error actualizando el importe');
+      alert('Error updating price');
     });
  
 }

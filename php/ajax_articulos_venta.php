@@ -1,6 +1,7 @@
 <?php
 
-
+  session_start();
+  $varsesion = $_SESSION['usuario'];
   require ('conectar.php');
   require('fun_conversiones.php');
   
@@ -14,7 +15,7 @@
       echo json_encode($jsonventa);
     }
     else{
-      echo $error = "Ha habido un error";
+      echo $error = "Error, something went wrong";
     }
     
   }
@@ -47,40 +48,51 @@
     echo json_encode($jsoncliente);
   }
   else{
-    echo $error = "Ha habido un error";
+    echo $error = "Error. Something went wrong";
   }
   }
   
   if ($_GET['action'] == 'guardar_linea'){
-    $idventa = $_GET['idventa'];
-    $idarticulo = $_GET['idarticulo'];
-    //si el valor es introducido con número decimal está delimitado por coma, lo pasa a . con esta función de string_replace
-    $cantidad = str_replace(",",".",$_GET['cantidad']);
-    $importe = $_GET['importe'];
+    if ($varsesion == 'user_test') {
+      echo '2';
+    } else {
+      $idventa = $_GET['idventa'];
+      $idarticulo = $_GET['idarticulo'];
+      //si el valor es introducido con número decimal está delimitado por coma, lo pasa a . con esta función de string_replace
+      $cantidad = str_replace(",",".",$_GET['cantidad']);
+      $importe = $_GET['importe'];
     
-    $sql = "INSERT INTO linventas(idventa, idarticulo, cantidad, pvplin) VALUES($idventa,$idarticulo,$cantidad,$importe)";
+      $sql = "INSERT INTO linventas(idventa, idarticulo, cantidad, pvplin) VALUES($idventa,$idarticulo,$cantidad,$importe)";
     
-    $resultado = $mysqli -> query($sql);
-
-    if ($resultado) {
-// se ejecuta un update en la tabla de articulos para que se grabe el precio de venta.
-      $precio = $importe/$cantidad;
-      $sql = "UPDATE articulos SET pvpv = ".$precio." WHERE idarticulo = ".$idarticulo;
       $resultado = $mysqli -> query($sql);
-      echo '1';
-    } else {
-      echo '0';
+
+      if ($resultado) {
+// se ejecuta un update en la tabla de articulos para que se grabe el precio de venta.
+        $precio = $importe/$cantidad;
+        $sql = "UPDATE articulos SET pvpv = ".$precio." WHERE idarticulo = ".$idarticulo;
+        $resultado = $mysqli -> query($sql);
+        echo '1';
+      } else {
+        echo '0';
+      }
     }
+    
   }
+
   if ($_GET['action'] == 'eliminar_linea') {
-    $id = $_GET['id'];
-    $sql = "DELETE FROM linventas WHERE idlinventa = $id";
-    $resultado = $mysqli -> query($sql);
-    if ($resultado) {
-      echo "1";
+    if ($varsesion == 'user_test') {
+      echo '2';
     } else {
-      echo "0";
+      $id = $_GET['id'];
+      $sql = "DELETE FROM linventas WHERE idlinventa = $id";
+      $resultado = $mysqli -> query($sql);
+      if ($resultado) {
+        echo "1";
+      } else {
+        echo "0";
+      }
     }
+    
   }
   
   if ($_GET['action'] == 'cargar_articulo_edit') {
@@ -94,44 +106,54 @@
       echo json_encode($jsonarticuloedit);
     }
     else{
-      echo $error = "Ha habido un error";
+      echo $error = "Error. something went wrong";
     }
     
   }
 
   if ($_GET['action'] == 'editar_linea') {
-    $id= $_GET['id'];
-    $idarticulo = $_GET['idarticulo'];
-    $cantidad = $_GET['cantidad'];
-    $importe = $_GET['importe'];
-    
-    $sql = "UPDATE linventas SET idarticulo = ".$idarticulo.", cantidad = ".$cantidad.", pvplin = ".$importe." WHERE idlinventa = ".$id;
-    
-    $resultado = $mysqli -> query($sql);
-    if ($resultado) {
-      echo "1";
+    if ($varsesion == 'user_test') {
+      echo '2';
     } else {
-      echo "0";
+      $id= $_GET['id'];
+      $idarticulo = $_GET['idarticulo'];
+      $cantidad = $_GET['cantidad'];
+      $importe = $_GET['importe'];
+    
+      $sql = "UPDATE linventas SET idarticulo = ".$idarticulo.", cantidad = ".$cantidad.", pvplin = ".$importe." WHERE idlinventa = ".$id;
+    
+      $resultado = $mysqli -> query($sql);
+      if ($resultado) {
+        echo "1";
+      } else {
+        echo "0";
+      }
     }
+    
     
   }
   if ($_GET['action'] == 'editar_venta'){
-        
-    $idVenta=$_GET['idventa'];
-    $fecha=$_GET['fecha'];
-    $idCliente=$_GET['idcliente'];
-    $numVenta=$_GET['numVenta'];
-    $iva=$_GET['iva'];
-    $notas=$_GET['notas'];
-    
-    $sql = "UPDATE ventas SET numventa = ".$numVenta.", fecha = '".$fecha."', idcliente = ".$idCliente.", iva = ".$iva.", notas = '".$notas."' WHERE idventa = ".$idVenta;
-    
-    $resultado = $mysqli -> query($sql);
-    
-    if ($resultado) {
-      echo "1";
+
+    if ($varsesion == 'user_test') {
+      echo '2';
     } else {
-      echo "0";
+      $idVenta=$_GET['idventa'];
+      $fecha=$_GET['fecha'];
+      $idCliente=$_GET['idcliente'];
+      $numVenta=$_GET['numVenta'];
+      $iva=$_GET['iva'];
+      $notas=$_GET['notas'];
+    
+      $sql = "UPDATE ventas SET numventa = ".$numVenta.", fecha = '".$fecha."', idcliente = ".$idCliente.", iva = ".$iva.", notas = '".$notas."' WHERE idventa = ".$idVenta;
+    
+      $resultado = $mysqli -> query($sql);
+    
+      if ($resultado) {
+        echo 1;
+      } else {
+        echo 0;
+      }
+
     }
   }
 
@@ -163,7 +185,7 @@
       echo $output;
     } else {
       //echo '<div class="alert alert-danger" role="alert">No existen articulos en esta venta. Haz clic en añadir articulos</div>';
-      echo '<p class="text-danger">No existen articulos en esta venta</p>';
+      echo '<p class="text-danger">There are no articles in this sale</p>';
     }
     
   }
@@ -190,6 +212,5 @@
     $resultado = $mysqli->query($sql);
     echo $rows=$resultado->num_rows;
   }
-  
   $mysqli->close();
   exit;

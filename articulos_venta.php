@@ -4,7 +4,7 @@
     /* se pone error cero, para que si se entra sin hacer login, no aparezca el error de php de que no existe variable usuario */
   error_reporting(0);
   if ($varsesion==null || empty($varsesion)) {
-    echo 'Hay que acceder a esta página a traves del formulario Login';
+    echo 'You must access to this url logging in';
     die();
   }
 
@@ -22,7 +22,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <title>Introducir Venta</title>
+    <title>New Sale</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1.5, minimum-scale=1.0">
     
@@ -34,7 +34,7 @@
 <!-- comprobacion de seguridad que usuario ha accedido mediante login -->
   <body>
     <div class="jumbotron jumbotron-fluid border border-white p-1">
-        <h2 class="text-center">Venta</h2>
+        <h2 class="text-center">Sale</h2>
     </div>
     <div class="contenedor">
       <div class="row">
@@ -44,26 +44,26 @@
             <div class="col-md-5">
 <!-- se pone display none a todo el form-group de idventa y el id cliente, no es información util para el usuario, sólo para filtrar resultados -->
               <div class="form-group row p-1 d-none">
-                <label for ="txtIdVenta" class="col-sm-3 text-sm-right p-sm-1 font-weight-bolder" >Id Venta</label>
+                <label for ="txtIdVenta" class="col-sm-3 text-sm-right p-sm-1 font-weight-bolder" >Id Sale</label>
                 <div class="col-sm-9">
                   <input type="text" class="form-control" id="txtIdVenta" name="txtIdVenta" readonly value="<?php echo $ventafiltro;?>">
                   <input type="text" class="form-control" id="txtIdCliente">
                 </div>
               </div>
               <div class="form-group row p-1">
-                <label for ="txtNumVenta" class="col-sm-4 text-sm-right p-sm-1 font-weight-bolder">Num. venta</label>
+                <label for ="txtNumVenta" class="col-sm-4 text-sm-right p-sm-1 font-weight-bolder">Num. Sale</label>
                 <div class="col-sm-8">
                   <input type="text" class="form-control" id="txtNumVenta" name="txtNumVenta" readonly>
                 </div>
               </div>
               <div class="form-group row p-1">
-                <label for ="txtFecha" class="col-sm-4 text-sm-right p-sm-1 font-weight-bolder">Fecha</label>
+                <label for ="txtFecha" class="col-sm-4 text-sm-right p-sm-1 font-weight-bolder">Date</label>
                 <div class="col-sm-8">
                   <input type="date" class="form-control" id="txtFecha" name="txtFecha" readonly>
                 </div>
               </div>
               <div class="form-group row p-1">
-                <label for ="txtCliente" class="col-lg-4 col-md-3 col-sm-4 text-sm-right p-sm-1 font-weight-bolder">Cliente</label>
+                <label for ="txtCliente" class="col-lg-4 col-md-3 col-sm-4 text-sm-right p-sm-1 font-weight-bolder">Client</label>
                 <div class="col-lg-8 col-md-9 col-sm-8">
                    <textarea name="txtCliente" class ="txt_area_cliente w-100" id="txtCliente" rows="3" readonly></textarea> 
                 </div>
@@ -76,19 +76,19 @@
                   <p class="p-2 text-right">Total: <span class="font-weight-bold" id="txtImporte"></span></p>
                 </div>
                 <div class="w-100 d-none d-md-block">
-                  <p class="p-2 text-right">Iva: <span class="font-weight-bold" id="txtIva"></span>% Importe: <span class="font-weight-bold" id="spanIva"></span></p>
+                  <p class="p-2 text-right">Tax: <span class="font-weight-bold" id="txtIva"></span>% Amount: <span class="font-weight-bold" id="spanIva"></span></p>
                 </div>
               </div>
             </div>
             <div class="col-md-4">
             <div class="row px-3">
               <label for="notas" class="w-100 pr-0 text-center col-sm-2 col-form-label">Notas</label>
-                <textarea name="txt_area_notas" class ="txt_area_cliente w-100" id="txt_area_notas" rows="4" placeholder="Se puede escribir alguna nota o comentario" readonly></textarea>
+                <textarea name="txt_area_notas" class ="txt_area_cliente w-100" id="txt_area_notas" rows="4" placeholder="Text here any comment" readonly></textarea>
             </div>
             <div class="w-100 d-none importe total d-md-block">
                   <div class="row">
-                    <div class="col text-center border border-success">NOTA: Sujeto pasivo de Iva.</div>
-                    <div class="col text-center">Total Factura:<span class="font-weight-bold" id="txtImporteTotal"></span></div>
+                    <div class="col text-center border border-success">NOTA: This client has no TAX.</div>
+                    <div class="col text-center">Total Amount:<span class="font-weight-bold" id="txtImporteTotal"></span></div>
                   </div>
                 </div>
             </div>
@@ -96,10 +96,10 @@
           </form>
         </div>
       <div class="col-lg-2 col-sm-2">
-        <button type="button" class="btn btn-warning w-100 mb-2" name="btn_edita_venta" id="btn_edita_venta" data-toggle="modal" data-target="#modal_edita_venta"><i class="far fa-edit"></i> Editar</button>
-        <a href="javascript:history.back(-1);" class="btn btn-secondary w-100 mb-2"><i class="fas fa-undo-alt"></i> Volver a ventas</a>
-        <button type="button" class="btn btn-primary w-100 mb-2" name="addArticulo" id="addArticulo" data-toggle="modal" data-target="#nuevoArticulo"><i class="far fa-plus-square"></i> Añadir articulos</button>
-        <a href="informes/factura.php?idventa=<?php echo $ventafiltro;?>" class="btn btn-outline-primary w-100"> <i class="fas fa-print"></i> Imprimir</a>
+        <button type="button" class="btn btn-warning w-100 mb-2" name="btn_edita_venta" id="btn_edita_venta" data-toggle="modal" data-target="#modal_edita_venta"><i class="far fa-edit"></i> Edit</button>
+        <a href="javascript:history.back(-1);" class="btn btn-secondary w-100 mb-2"><i class="fas fa-undo-alt"></i> Back to Sales</a>
+        <button type="button" class="btn btn-primary w-100 mb-2" name="addArticulo" id="addArticulo" data-toggle="modal" data-target="#nuevoArticulo"><i class="far fa-plus-square"></i> Add Item</button>
+        <a href="informes/factura.php?idventa=<?php echo $ventafiltro;?>" class="btn btn-outline-primary w-100"> <i class="fas fa-print"></i> Print</a>
       </div> 
     </div>
     <div class="row table-responsible mt-2">
@@ -108,11 +108,11 @@
           <tr>
 <!-- no hace falta mostrar el campo IdVenta ni IdLinVenta, se llamará después como row['id'] o el atributo id de editar y eliminar para eliminar, modificar, etc. -->
           <!--  <th>IdVenta</th> -->
-            <th>Articulo</th>
-            <th>Descripcion</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Importe</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Amount</th>
             <th></th>
             <th></th>
           </tr>
@@ -136,28 +136,28 @@
         <div class="modal-body">
           <form class="add-articulo w-100 shadow-lg form-horizontal" action="" id="añadirArticulo">
             <div class="form-group d-none">
-              <input type="text" class="form-control" id="txtIdArticulo" placeholder="Escribe Articulo">
+              <input type="text" class="form-control" id="txtIdArticulo" placeholder="Type Item">
               <input type="text" class="form-control" id="txtIdLinea">
             </div>
-              <label for="txtArticulo">Articulo</label>
+              <label for="txtArticulo">Item</label>
             <div class="form-group form-row mx-1">
-              <input type="text" class="form-control col-3" id="txtArticulo" placeholder="IdArticulo">
+              <input type="text" class="form-control col-3" id="txtArticulo" placeholder="IdItem">
               <input type="text" class="form-control col-9" id="txtDescripcion" value="Descripcion Articulo" readonly tabindex="-1">
               <small id="errorArticulo" class="text-danger font-weight-bold"></small>
             </div>
             <div class="form-row mx-1">
               <div class="form-group col-4 text-center">
-                <label for="txtCantidad">Cantidad</label>
+                <label for="txtCantidad">Quantity</label>
                 <input type="text" class="form-control text-right" id="txtCantidad" value="0">
                 <small id="errorCantidad" class="text-danger font-weight-bold"></small>
               </div>
               <div class="form-group col-4 text-center">
-                <label class="text-center" for="txtPrecio">Precio</label>
+                <label class="text-center" for="txtPrecio">Price</label>
                 <input type="text" class="form-control text-right" id="txtPrecio" value="0">
                 <small id="errorPrecio" class="text-danger font-weight-bold"></small>
               </div>
               <div class="form-group col-4 text-center">
-                <label class="text-center" for="txtImporteLin">Importe</label>
+                <label class="text-center" for="txtImporteLin">Amount</label>
                 <input type="text" class="form-control text-right" id="txtImporteLin" readonly>
               </div>
             </div>
@@ -165,9 +165,9 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="btnGuardar"><i class="far fa-save"></i> Guardar</button>
-          <button type="button" class="btn btn-warning" id="btnEditar"><i class="fas fa-edit"></i> Editar</button>
+          <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="btnGuardar"><i class="far fa-save"></i> Save</button>
+          <button type="button" class="btn btn-warning" id="btnEditar"><i class="fas fa-edit"></i> Edit</button>
         </div>
       </div>
     </div>
@@ -180,12 +180,12 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" id=>
-        <p> ¿Deseas eliminar este articulo de la venta?
+        <p> Are you sure you want to delete this item?
         </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-danger btn-xs text-light" id="btn_eliminar_linea"><i class="fas fa-trash-alt"></i>Eliminar</a>  
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-danger btn-xs text-light" id="btn_eliminar_linea"><i class="fas fa-trash-alt"></i>Delete</a>  
         </div>
       </div>
     </div>
@@ -195,7 +195,7 @@
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Edita Venta</h4>
+            <h4 class="modal-title" id="myModalLabel">Edit Sale</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
 
@@ -204,13 +204,13 @@
             <form class= "w-100 shadow-lg form-horizontal" id="edit_form">
             <div class="form-row mx-1">
               <div class="form-group col-6 text-center">
-                <label for="txt_edit_fecha">Fecha</label>
+                <label for="txt_edit_fecha">Date</label>
                 <input type="date" class="form-control text-center" id="txt_edit_fecha">
                 <small id="error_edit_fecha" class="text-danger font-weight-bold"></small>
               </div>
               <div class="form-group col-6 text-center">
-                <label class="text-center w-100" for="txt_edit_numVenta">Num.Venta</label>
-                <input type="number" class="form-control text-right w-50 d-inline" id="txt_edit_numVenta" placeholder="Num.Venta">
+                <label class="text-center w-100" for="txt_edit_numVenta">Num.Sale</label>
+                <input type="number" class="form-control text-right w-50 d-inline" id="txt_edit_numVenta" placeholder="Num.Sale">
 <!-- se introduce el input txt_duplicado pero se le da display none, es para registrar si existe duplicado o no de num_venta, cuando se edita la compra -->
                 <input type="text" class="d-none" id="txt_duplicado">
                 <p class="w-50 d-inline">/19</p>
@@ -222,13 +222,13 @@
             <span id="spn_errorfecha" class="text-danger small font-weight-bold"></span>
             </div>
             <div class="form-group row">
-              <label for="txt_edit_cliente" class="col-sm-2 col-form-label">Cliente</label>
+              <label for="txt_edit_cliente" class="col-sm-2 col-form-label">Client</label>
               <div class="col-sm-10">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="spn_idcliente">00</span>
                   </div>
-                  <input type="text" class="form-control" id="txt_edit_cliente" placeholder="Escribe cliente">
+                  <input type="text" class="form-control" id="txt_edit_cliente" placeholder="Type client">
                 </div>
               </div>
             </div>
@@ -237,7 +237,7 @@
               <span id="spn_errorcliente" class="text-danger small font-weight-bold"></span>
             </div>
             <div class="form-group row">
-              <label for="txt_edit_iva" class="col-sm-2 col-form-label">Iva</label>
+              <label for="txt_edit_iva" class="col-sm-2 col-form-label">Tax</label>
               <div class="col-sm-10">
                 <select class="form-control" id="txt_edit_iva" name="txt_edit_iva" required>
                     <option value="23">23</option>
@@ -260,18 +260,18 @@
               </div>
             </div>
               <div class="form-group row">
-              <label for="notas" class="pr-0 text-center col-sm-2 col-form-label">Notas</label>
+              <label for="notas" class="pr-0 text-center col-sm-2 col-form-label">Notes</label>
               <div class="col-sm-10">
                 <div class="input-group">
-                <textarea name="notas" class ="w-100 " id="txtarea_edit_notas" rows="3" placeholder="Escribe notas o comentarios aquí"></textarea>
+                <textarea name="notas" class ="w-100 " id="txtarea_edit_notas" rows="3" placeholder="Type some notes here"></textarea>
                 </div>
               </div>
             </div>
               </form>
           <!-- Modal footer -->
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-warning" id="btn_edit_venta"><i class="fas fa-edit"></i> Editar</button>
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-warning" id="btn_edit_venta"><i class="fas fa-edit"></i> Edit</button>
             </div>
         </div>
       </div>

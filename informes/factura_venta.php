@@ -43,11 +43,11 @@ function Header() {
   $this->SetXY(140,20);
   $this->SetTextColor(15, 82, 0);
   //Cell(ancho,alto,'texto',0 o 1 si quieres bordes tambien puede ser B T L R donde lo quieres, 0 o 1 espacio del Ln, 'C' disposición del texto, 0 o 1 si quieres que tenga fill)
-  $this->Cell(50,10,'FACTURA',0,1,'C');
+  $this->Cell(50,10,'INVOICE',0,1,'C');
   $this->Ln();
   $this->SetFont('Arial','BU',9);
   $this->SetX(30);
-  $this->Cell(65,5,'FRANCISCO JOSE CATALAN MAS',0,1,'C');
+  $this->Cell(65,5,'RECYCLING LTD.',0,1,'C');
   $this->SetXY(140,40);
   $this->SetFont('Arial','B',10);
   //SetFillColor color de relleno celda
@@ -56,7 +56,7 @@ function Header() {
   $this->SetTextColor(255, 255, 255);
   //SetDrawColor color de los bordes
   $this->SetDrawColor(255, 255, 255);
-  $this->Cell(25,7,utf8_decode('Factura Nº:'),1,1,'R',1);
+  $this->Cell(25,7,utf8_decode('Invoice Num:'),1,1,'R',1);
   $this->SetXY(165,40);
   $this->SetFillColor(230,  230,  230);
   $this->SetTextColor(0, 0, 0);
@@ -67,12 +67,12 @@ function Header() {
   $this->SetX(30);
   $this->SetTextColor(15, 82, 0);
   $this->SetFont('Arial','B',8);
-  $this->Cell(65,5,'CIF:48310352W',0,1,'C');
+  $this->Cell(65,5,'CIF:00000000x',0,1,'C');
   $this->SetXY(140,47);
   $this->SetFont('Arial','B',10);
   $this->SetFillColor(27, 139, 2);
   $this->SetTextColor(255, 255, 255);
-  $this->Cell(25,7,utf8_decode('Fecha:'),0,1,'R',1);
+  $this->Cell(25,7,utf8_decode('Date:'),0,1,'R',1);
   $this->SetXY(165,47);
   $this->SetTextColor(0, 0, 0);
   $this->SetFont('Courier','',10);
@@ -81,14 +81,14 @@ function Header() {
   $this->Ln(-4);
   $this->SetX(30);
   $this->SetFont('Arial','',8);
-  $texto_fran="VIA FLAMINIA 6 (POBLA DE VALLBONA)"."\n46185 VALENCIA"."\nTEL: 600452352";
+  $texto_fran="VIA FLAMENCA 24 (POBLA DE VILANOVA)"."\n46185 VALENCIA"."\nTEL: 600123456";
   $this->MultiCell(65,4,$texto_fran,0);
   $this->SetXY(110,55);
   $this->SetFont('Arial','B',10);
   $this->SetTextColor(15, 82, 0);
   $this->SetDrawColor(15, 82, 0);
   $this->SetLineWidth(0.5);
-  $this->Cell(88,7,'Cliente:','B',0,'L');
+  $this->Cell(88,7,'Client:','B',0,'L');
   $this->SetXY(110,62);
   $this->SetLineWidth(0.2);
   $this->Ln(20);
@@ -103,18 +103,18 @@ function Header() {
   $this->SetFillColor(27, 139, 2);
   $this->SetTextColor(255, 255, 255);
   $this->SetFont('Arial','B',10);
-  $this->Cell(21,10,'Articulo',0,0,'C',1);
-  $this->Cell(95,10,'Descripcion',0,0,'C',1);
-  $this->Cell(20,10,'Cantidad',0,0,'C',1);
-  $this->Cell(23,10,'Precio',0,0,'C',1);
-  $this->Cell(25,10,'Importe',0,0,'C',1);
+  $this->Cell(21,10,'Item',0,0,'C',1);
+  $this->Cell(95,10,'Description',0,0,'C',1);
+  $this->Cell(20,10,'Quantity',0,0,'C',1);
+  $this->Cell(23,10,'Price',0,0,'C',1);
+  $this->Cell(25,10,'Amount',0,0,'C',1);
   $this->Ln(); 
   }
   function Footer()
 {
     $this->SetY(-15);
     $this->SetFont('Arial','I',8);
-    $this->Cell(0,10,'Continua .....'.utf8_decode('Página ').$this->PageNo().' de {nb}',0,0,'R');
+    $this->Cell(0,10,'Continue .....'.utf8_decode('Page ').$this->PageNo().' of {nb}',0,0,'R');
 // si se hace así, la última página, coge color blanco el caracter, y este mensaje no sale para la última hoja.
 }
 }
@@ -177,7 +177,7 @@ if ($resultado_lin) {
 if ($notas) {
   $pdf->Ln(2);
   $pdf->SetX(45);
-  $pdf->Cell(5,4,'Observaciones: ',0,0,'R',0);
+  $pdf->Cell(5,4,'Comments: ',0,0,'R',0);
   $pdf->MultiCell(85,5,utf8_decode($notas),1,'C',0);
   }
 
@@ -203,11 +203,10 @@ $pdf->SetX(30);
 // se define x e y, para que después de hacer el MultiCell, se haga un setXY a continuación, el motivo es que después de hacer un MultiCell, es que hace un Ln automatico, y no es posible escribir a continuación.
 $x = $pdf -> GetX();
 $y = $pdf -> GetY();
-$pdf->MultiCell(80,8,utf8_decode('NOTA: SUJETO PASIVO DEL IMPUESTO EL
-DESTINATARIO DE LA OPERACIÓN'),1,'C',0);
+$pdf->MultiCell(80,8,utf8_decode('NOTE: THIS CLIENT HAS TAX FREE'),1,'C',0);
 $pdf->SetXY($x + 80, $y);
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(61,8,'Subtotal Factura:',0,0,'R');
+$pdf->Cell(61,8,'Subtotal Invoice:',0,0,'R');
 $pdf->SetFont('Arial','',10);
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Cell(28,8,convertir_precio($subtotal).EURO,0,0,'R',1);
@@ -216,7 +215,7 @@ $pdf->Ln();
 $pdf->SetTextColor(15, 82, 0);
 $pdf->SetFont('Arial','B',10);
 $pdf->SetX(15);
-$pdf->Cell(144,8,'Iva:',0,0,'R');
+$pdf->Cell(144,8,'Tax:',0,0,'R');
 $pdf->SetFont('Arial','',10);
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Cell(10,8,$iva.'%',0,0,'R',1);
@@ -228,7 +227,7 @@ $pdf->SetFillColor(27, 139, 2);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetLineWidth(0);
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(156,10,'Total factura:',0,0,'R',1);
+$pdf->Cell(156,10,'Total invoice:',0,0,'R',1);
 $pdf->Cell(28,10,convertir_precio($subtotal).EURO,0,0,'R',1);
 
 
